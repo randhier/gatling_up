@@ -23,7 +23,7 @@ class Gatling extends Simulation {
 
     val token1 = regex("""name="authenticity_token" value="([^"]*)"""").saveAs("authToken")
 
-	val scnMngr = scenario("ManagerSim")
+	val scenarioOne = scenario("ManagerSim")
 		.exec(http("mngr_request_0")
 			.get("/sign_in")
             .check(token1))
@@ -45,5 +45,5 @@ class Gatling extends Simulation {
 			.get("sign_out"))
 
     setUp(
-          scnCadm.inject(atOnceUsers(Users)).protocols(httpProtocol))
+          scenarioOne.inject(atOnceUsers(Users)).protocols(httpProtocol))
 }
